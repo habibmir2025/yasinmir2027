@@ -14,8 +14,11 @@ def send_message(chat_id, text):
     }
     requests.post(url, json=data)
 
-@app.route("/", methods=["POST"])
+@app.route("/", methods=["GET", "POST"])
 def webhook():
+    if request.method == "GET":
+        return "✅ Bale Bot is running!"
+
     data = request.get_json()
 
     if "message" in data:
